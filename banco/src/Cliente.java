@@ -15,6 +15,10 @@ class Cliente {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getCpf() {
         return cpf;
     }
@@ -25,10 +29,6 @@ class Cliente {
 
     public Endereco getEndereco() {
         return endereco;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setEndereco(Endereco endereco) {
