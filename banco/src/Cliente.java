@@ -55,12 +55,9 @@ class Cliente {
         this.numeroTelefone = numeroTelefone;
     }
 
-    // Adicione métodos para enviar notificações por e-mail e SMS.
     public void enviarEmail(String mensagem) {
-        // Lógica para enviar um e-mail para this.email com a mensagem fornecida.
     }
 
     public void enviarSMS(String mensagem) {
-        // Lógica para enviar um SMS para this.numeroTelefone com a mensagem fornecida.
     }
 }
