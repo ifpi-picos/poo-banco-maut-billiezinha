@@ -1,30 +1,17 @@
 import java.util.List;
 import java.util.Scanner;
 
-class Cliente {
+class ContaPoupanca extends Conta {
+    private double taxaTransferencia;
+    private double taxaRendimento;
 
-    public Cliente(String nomeCliente, String cpfCliente, String dataNascimentoCliente, Endereco enderecoCliente,
-            String emailCliente, String numeroTelefoneCliente) {
+    public ContaPoupanca(String numeroAgencia, String numeroConta, double saldo, Cliente cliente, double taxaTransferencia, double taxaRendimento) {
+        super(numeroAgencia, numeroConta, saldo, cliente);
+        this.taxaTransferencia = taxaTransferencia;
+        this.taxaRendimento = taxaRendimento;
     }
 
-    public String getEmail() {
-        return null;
-    }
-
-    public String getNumeroTelefone() {
-        return null;
-    }
-}
-
-class Conta {
-    private String numeroConta;
-    public double saldo;
-    
-    public Conta(String numeroAgencia, String numeroConta, double saldo, Cliente cliente) {
-        this.numeroConta = numeroConta;
-        this.saldo = saldo;
-    }
-
+    @Override
     public void operarConta(Scanner scanner, List<Conta> contas) {
         boolean sair = false;
         while (!sair) {
@@ -86,51 +73,35 @@ class Conta {
         scanner.close();
     }
 
-    public double consultarSaldo() {
-        return saldo;
-    }
-
-    public void realizarDeposito(double valor) {
-        if (valor > 0) {
-            saldo += valor;
-            System.out.println("Depósito de R$" + valor + " realizado em sua conta.");
-        }
-    }
-
-    public boolean realizarSaque(double valor) {
-        if (valor > 0 && valor <= saldo) {
-            saldo -= valor;
-            System.out.println("Saque de R$" + valor + " realizado em sua conta.");
-            return true;
-        }
-        return false;
-    }
-
+    @Override
     public boolean realizarTransferencia(Conta destino, double valor) {
-        if (valor > 0 && valor <= saldo) {
-            saldo -= valor;
-            destino.realizarDeposito(valor);
+        if (valor > 0 && valor <= super.consultarSaldo()) {
+            super.saldo -= valor;
+            double valorComTaxa = valor + (valor * taxaTransferencia / 100);
+            destino.realizarDeposito(valorComTaxa);
             System.out.println("Transferência de R$" + valor + " realizada para a conta " + destino.getNumeroConta() + ".");
             return true;
         }
         return false;
     }
 
-    public void exibirExtrato() {
-        System.out.println("Extrato da Conta " + numeroConta + ":");
-        System.out.println("Saldo: R$" + saldo);
-    }
-
-    public String getNumeroConta() {
-        return numeroConta;
-    }
-
-    public static Conta encontrarContaPorNumero(List<Conta> contas, String numeroConta) {
-        for (Conta conta : contas) {
-            if (conta.getNumeroConta().equals(numeroConta)) {
-                return conta;
-            }
+    @Override
+    public boolean realizarSaque(double valor) {
+        if (valor > 0 && valor <= super.consultarSaldo()) {
+            double valorComTaxa = valor - (valor * taxaRendimento / 100);
+            super.saldo -= valorComTaxa;
+            System.out.println("Saque de R$" + valor + " realizado em sua conta.");
+            return true;
         }
-        return null;
+        return false;
+    }
+
+    @Override
+    public void realizarDeposito(double valor) {
+        if (valor > 0) {
+            double valorComRendimento = valor + (valor * taxaRendimento / 100);
+            super.saldo += valorComRendimento;
+            System.out.println("Depósito de R$" + valor + " realizado em sua conta.");
+        }
     }
 }
