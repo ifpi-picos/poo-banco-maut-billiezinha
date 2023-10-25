@@ -24,7 +24,7 @@ class ContaCorrente extends Conta {
             System.out.println("4. Realizar Transferência");
             System.out.println("5. Exibir Extrato");
             System.out.println("6. Consultar Cheque Especial");
-            System.out.println("7. Voltar");
+            System.out.println("7. Sair");
 
             int escolha = scanner.nextInt();
             double valor;

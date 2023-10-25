@@ -21,7 +21,7 @@ class ContaPoupanca extends Conta {
             System.out.println("3. Realizar Saque");
             System.out.println("4. Realizar Transferência");
             System.out.println("5. Exibir Extrato");
-            System.out.println("6. Voltar");
+            System.out.println("6. Sair");
 
             int escolha = scanner.nextInt();
             double valor;
