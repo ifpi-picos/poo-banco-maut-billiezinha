@@ -10,7 +10,6 @@ class ContaCorrente extends Conta {
         super(numeroAgencia, numeroConta, saldo, cliente);
         this.chequeEspecial = chequeEspecial;
         this.transferenciasRealizadas = 0;
-        this.taxa = taxa;
     }
 
     public void exibirChequeEspecial() {
