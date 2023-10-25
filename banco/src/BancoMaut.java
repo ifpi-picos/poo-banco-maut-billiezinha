@@ -71,7 +71,7 @@ public class BancoMaut {
         System.out.print("Data de Nascimento: ");
         String dataNascimentoCliente = scanner.nextLine();
 
-        System.out.println("Endereço do Cliente:");
+        System.out.println("-- Endereço do Cliente --");
         System.out.print("Logradouro: ");
         String logradouroCliente = scanner.nextLine();
         System.out.print("Número: ");

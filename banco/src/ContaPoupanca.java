@@ -99,7 +99,7 @@ class ContaPoupanca extends Conta {
     @Override
     public void realizarDeposito(double valor) {
         if (valor > 0) {
-            double valorComRendimento = valor + (valor * taxaRendimento / 100);
+            double valorComRendimento = valor + (valor * taxaRendimento / 100.0);
             super.saldo += valorComRendimento;
             System.out.println("Depósito de R$" + valor + " realizado em sua conta.");
         }
