@@ -105,11 +105,11 @@ public class BancoMaut {
     
         if (escolhaTipoConta == 1) {
             double valorChequeEspecial = 1000.0;
-            return new ContaCorrente(null, null, valorChequeEspecial, escolhaTipoConta, novoCliente);
+            return new ContaCorrente("111", "001", valorChequeEspecial, escolhaTipoConta, novoCliente);
         } else if (escolhaTipoConta == 2) {
             double taxaTransferencia = 0.10; 
             double rendimento = 0.10; 
-            return new ContaPoupanca(null, null, 0, novoCliente, taxaTransferencia, rendimento);
+            return new ContaPoupanca("222", "002", 0, novoCliente, taxaTransferencia, rendimento);
         } else {
             System.out.println("Tipo de conta inválido. A conta não foi criada.");
             return null;

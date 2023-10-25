@@ -4,15 +4,19 @@ import java.util.Scanner;
 class ContaCorrente extends Conta {
     private double chequeEspecial;
     private int transferenciasRealizadas;
+    private double taxa = 0.05;
 
     public ContaCorrente(String numeroAgencia, String numeroConta, double saldo, double chequeEspecial, Cliente cliente) {
         super(numeroAgencia, numeroConta, saldo, cliente);
         this.chequeEspecial = chequeEspecial;
         this.transferenciasRealizadas = 0;
+        this.taxa = taxa;
     }
-    public void exibirChequeEspecial(){
-        System.out.println("Cheque Especial " + chequeEspecial + ":");
+
+    public void exibirChequeEspecial() {
+        System.out.println("Cheque Especial: R$" + chequeEspecial);
     }
+
     @Override
     public void operarConta(Scanner scanner, List<Conta> contas) {
         boolean sair = false;
@@ -55,12 +59,9 @@ class ContaCorrente extends Conta {
                         if (contaDestino != null) {
                             System.out.print("Informe o valor da transferência: ");
                             valor = scanner.nextDouble();
-                            if (realizarTransferencia(contaDestino, valor)) {
-                                System.out.println("Transferência realizada com sucesso.");
-                                transferenciasRealizadas++;
-                            } else {
-                                System.out.println("Saldo insuficiente.");
-                            }
+                            transfere(valor, contaDestino);
+                            transferenciasRealizadas++;
+                            System.out.println("Transferência realizada com sucesso.");
                         } else {
                             System.out.println("Conta de destino não encontrada.");
                         }
@@ -77,13 +78,20 @@ class ContaCorrente extends Conta {
                 case 7:
                     sair = true;
                     break;
-                
                 default:
                     System.out.println("Escolha inválida. Tente novamente.");
             }
         }
-        scanner.close(); 
+        scanner.close();
     }
 
+    public void transfere(double valor, Conta destino) {
+        if (transferenciasRealizadas > 2) {
+            double taxaTransferencia = this.taxa;
+            this.saldo -= valor + (valor * taxaTransferencia);
+        } else {
+            saldo -= valor;
+            destino.saldo += valor;
+        }
+    }
 }
-
