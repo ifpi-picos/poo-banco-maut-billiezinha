@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.Scanner;
 
+// não deveria ter essa classe aqui
 class Cliente {
 
-    public Cliente(String nomeCliente, String cpfCliente, String dataNascimentoCliente, Endereco enderecoCliente,
-            String emailCliente, String numeroTelefoneCliente) {
-    }
+    public Cliente(String nomeCliente, String cpfCliente, String dataNascimentoCliente,
+            Endereco enderecoCliente, String emailCliente, String numeroTelefoneCliente) {}
 
     public String getEmail() {
         return null;
@@ -16,15 +16,17 @@ class Cliente {
     }
 }
 
+
 class Conta {
     private String numeroConta;
     public double saldo;
-    
+
     public Conta(String numeroAgencia, String numeroConta, double saldo, Cliente cliente) {
         this.numeroConta = numeroConta;
         this.saldo = saldo;
     }
 
+    // esse método deveria ser colocado na classe de teste/main
     public void operarConta(Scanner scanner, List<Conta> contas) {
         boolean sair = false;
         while (!sair) {
@@ -110,7 +112,8 @@ class Conta {
         if (valor > 0 && valor <= saldo) {
             saldo -= valor;
             destino.realizarDeposito(valor);
-            System.out.println("Transferência de R$" + valor + " realizada para a conta " + destino.getNumeroConta() + ".");
+            System.out.println("Transferência de R$" + valor + " realizada para a conta "
+                    + destino.getNumeroConta() + ".");
             return true;
         }
         return false;
@@ -133,5 +136,5 @@ class Conta {
         }
         return null;
     }
-    
+
 }

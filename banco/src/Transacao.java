@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Nome da classe diferente do nome do arquivo
 class Conta {
     private String numeroConta;
     public double saldo;
@@ -13,8 +14,7 @@ class Conta {
         this.transacoes = new ArrayList<>();
     }
 
-    public void operarConta(Scanner scanner, List<Conta> contas) {
-    }
+    public void operarConta(Scanner scanner, List<Conta> contas) {}
 
     public double consultarSaldo() {
         return saldo;
@@ -42,7 +42,8 @@ class Conta {
         if (valor > 0 && valor <= saldo) {
             saldo -= valor;
             destino.realizarDeposito(valor);
-            System.out.println("Transferência de R$" + valor + " realizada para a conta " + destino.getNumeroConta() + ".");
+            System.out.println("Transferência de R$" + valor + " realizada para a conta "
+                    + destino.getNumeroConta() + ".");
             registrarTransacao("Transferência", valor);
             return true;
         }
